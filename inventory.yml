@@ -81,21 +81,6 @@ openstack_storage:
     openstack133:
 linux:
   hosts:
-    openstack137:
-      ansible_host: 192.168.86.137
-      ceph_internal_ip: 10.0.2.137
-      ceph_external_ip: 10.0.10.137
-      tunnel_ip: 10.0.20.137
-    openstack138:
-      ansible_host: 192.168.86.138
-      ceph_internal_ip: 10.0.2.138
-      ceph_external_ip: 10.0.10.138
-      tunnel_ip: 10.0.20.138
-    openstack139:
-      ansible_host: 192.168.86.139
-      ceph_internal_ip: 10.0.2.139
-      ceph_external_ip: 10.0.10.139
-      tunnel_ip: 10.0.20.139
     openstack135:
       ansible_host: 192.168.86.135
       ceph_internal_ip: 10.0.2.135
