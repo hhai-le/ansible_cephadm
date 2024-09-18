@@ -1,0 +1,2 @@
+- name: deploy osd
+  shell: "{{ lookup('template', 'ceph_orch_apply_osd.sh.j2') }}"

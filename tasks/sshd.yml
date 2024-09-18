@@ -1,0 +1,26 @@
+---
+- name: PermitRootLogin from first host
+  when: inventory_hostname in groups['non_deployer']
+  blockinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    block: |
+      {% for node in groups['deployer'] %}
+      Match Address {{ hostvars[node].ansible_host }}
+              PermitRootLogin yes
+
+      {% endfor %}
+
+- name: restart sshd
+  systemd:
+    name: sshd
+    state: restarted
+
+- name: generate update knowns_host
+  template:
+    src: ssh_keyscan.sh.j2
+    dest: /tmp/ssh_keyscan.sh
+    mode: '0755'
+
+- name: run update knowns_host
+  shell: /bin/bash /tmp/ssh_keyscan.sh
