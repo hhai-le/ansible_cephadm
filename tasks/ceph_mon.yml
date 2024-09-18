@@ -3,6 +3,8 @@
     src: ceph_orch_apply_mon.sh.j2
     dest: /tmp/ceph_orch_apply_mon.sh
 
-- name: deploy mon
-  shell: "{{ lookup('template', 'ceph_orch_apply_mon.sh.j2') }}"
+#- name: deploy mon
+#  shell: "{{ lookup('template', 'ceph_orch_apply_mon.sh.j2') }}"
 
+- name: deploy mon
+  shell: /bin/bash /tmp/ceph_orch_apply_mon.sh
