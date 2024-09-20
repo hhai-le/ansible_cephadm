@@ -1,28 +1,37 @@
 ---
 # tasks file for ansible_openstack_ceph
-- include_tasks: common.yml
+- name: install common packages
+  include_tasks: common.yml
 
-- include_tasks: docker.yml
+- name: install docker-ce
+  include_tasks: docker.yml
 
 - name: reset ssh connection
   meta: reset_connection
 
-- include_tasks: sshd.yml
+- name: update sshd config 
+  include_tasks: sshd.yml
 
-- include_tasks: netplan.yml
+- name: update network configuration
+  include_tasks: netplan.yml
 
-- include_tasks: cephadm.yml
+- name: install cephadm
+  include_tasks: cephadm.yml
   when: inventory_hostname in groups['deployer']
 
-- include_tasks: ceph.yml
+- name: install ceph and bootstrap
+  include_tasks: ceph.yml
   when: inventory_hostname in groups['deployer']
 
-- include_tasks: ceph_mon.yml
+- name: deploy ceph monitor
+  include_tasks: ceph_mon.yml
   when: inventory_hostname in groups['deployer']
 
-- include_tasks: ceph_osd.yml
+- name: deploy ceph osd
+  include_tasks: ceph_osd.yml
   when: inventory_hostname in groups['deployer']
 
-- include_tasks: ceph_pool_keyring.yml
+- name: create ceph pool and keyring
+  include_tasks: ceph_pool_keyring.yml
   when: inventory_hostname in groups['deployer']
 
